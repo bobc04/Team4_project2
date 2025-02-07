@@ -1,3 +1,4 @@
+// starter code to use, was on its own page, now is a component //
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
