@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize';
 import User from './User';
-import Job from './Job';
+import Job from './Jobs';
 import Service from './Service';
 import sequelize from '../config/dbConfig';
 

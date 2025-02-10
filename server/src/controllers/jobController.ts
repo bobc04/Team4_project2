@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Job from '../models/Job';
+import Job from '../models/Jobs';
 
 export const createJob = async (req: Request, res: Response) => {
   const { title, description, location, category } = req.body;

@@ -3,16 +3,14 @@ import sequelize from '../config/dbConfig';
 import User from './User';
 import Category from './Category';
 
-class Service extends Model {
+class Jobs extends Model {
   public id!: number;
   public userId!: number;
-  public description!: string;
+  public jobDescription!: string;
   public location!: string;
-  public yearsOfExperience?: number;
-  public hasReferences?: boolean;
 }
 
-Service.init(
+Jobs.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -27,7 +25,7 @@ Service.init(
         key: 'id',
       },
     },
-    description: {
+    jobDescription: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
@@ -35,23 +33,15 @@ Service.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    yearsOfExperience: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
-    hasReferences: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true,
-    },
   },
   {
     sequelize,
-    modelName: 'Service',
+    modelName: 'Jobs',
   }
 );
 
-Service.belongsTo(User, { foreignKey: 'userId' });
-Service.belongsToMany(Category, { through: 'ServiceCategory', foreignKey: 'serviceId' });
-Category.belongsToMany(Service, { through: 'ServiceCategory', foreignKey: 'categoryId' });
+Jobs.belongsTo(User, { foreignKey: 'userId' });
+Jobs.belongsToMany(Category, { through: 'JobCategory', foreignKey: 'jobId' });
+Category.belongsToMany(Jobs, { through: 'JobCategory', foreignKey: 'categoryId' });
 
-export default Service;
+export default Jobs;
