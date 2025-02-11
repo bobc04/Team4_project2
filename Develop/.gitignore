@@ -29,3 +29,4 @@ build/
 
 # Temporary Files
 *.log
+.DS_Store
