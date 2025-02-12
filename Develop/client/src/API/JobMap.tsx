@@ -30,7 +30,7 @@ export default function JobMap({ jobs, onJobSelect }: JobMapProps) {
   );
 
   return (
-    <div className="h-[400px] w-[800px] rounded-lg overflow-hidden border border-gray-300">
+    <div className="h-[400px] w-[801px] rounded-lg overflow-hidden border border-gray-300">
       <MapContainer
         bounds={bounds}
         style={{ height: "100%", width: "100%" }}
