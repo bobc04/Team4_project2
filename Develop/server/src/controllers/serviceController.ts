@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Service from '../models/Service';
+import Service from '../models/service';
 
 export const createService = async (req: Request, res: Response) => {
   const { name, description, category, yearsOfExperience } = req.body;
