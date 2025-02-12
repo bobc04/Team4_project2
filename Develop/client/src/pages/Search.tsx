@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { UserIcon, Users, ArrowRight, X } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../lib/store';
+import react, { useState } from "react";
+import { UserIcon, Users, ArrowRight, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../lib/store";
 
 export function Search() {
   const navigate = useNavigate();
   const user = useAuthStore((state) => state.user);
   const [showModal, setShowModal] = useState(false);
-  const [intendedPath, setIntendedPath] = useState('');
+  const [intendedPath, setIntendedPath] = useState("");
 
   const handleActionClick = (path: string) => {
     if (user) {
@@ -33,14 +33,18 @@ export function Search() {
                 <UserIcon className="h-8 w-8 text-white" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-white">Looking for Work?</h2>
-                <p className="mt-1 text-blue-100">Find your next opportunity and showcase your skills</p>
+                <h2 className="text-2xl font-bold text-white">
+                  Looking for Work?
+                </h2>
+                <p className="mt-1 text-blue-100">
+                  Find your next opportunity and showcase your skills
+                </p>
               </div>
             </div>
-            
+
             <div className="mt-8">
               <button
-                onClick={() => handleActionClick('/work')}
+                onClick={() => handleActionClick("/work")}
                 className="inline-flex items-center gap-2 px-6 py-3 bg-white text-blue-600 rounded-lg font-medium hover:bg-blue-50 transition-colors"
               >
                 Browse Listings
@@ -58,14 +62,18 @@ export function Search() {
                 <Users className="h-8 w-8 text-white" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-white">Looking to Hire?</h2>
-                <p className="mt-1 text-purple-100">Find talented professionals for your projects</p>
+                <h2 className="text-2xl font-bold text-white">
+                  Looking to Hire?
+                </h2>
+                <p className="mt-1 text-purple-100">
+                  Find talented professionals for your projects
+                </p>
               </div>
             </div>
-            
+
             <div className="mt-8">
               <button
-                onClick={() => handleActionClick('/services')}
+                onClick={() => handleActionClick("/services")}
                 className="inline-flex items-center gap-2 px-6 py-3 bg-white text-purple-600 rounded-lg font-medium hover:bg-purple-50 transition-colors"
               >
                 Browse Candidates
@@ -86,25 +94,30 @@ export function Search() {
             >
               <X size={24} />
             </button>
-            
+
             <div className="text-center space-y-4">
-              <h3 className="text-2xl font-bold text-gray-900">Create an Account</h3>
+              <h3 className="text-2xl font-bold text-gray-900">
+                Create an Account
+              </h3>
               <p className="text-gray-600">
-                To {intendedPath === '/work' ? 'browse job listings' : 'view candidates'}, 
-                you'll need to create an account first.
+                To{" "}
+                {intendedPath === "/work"
+                  ? "browse job listings"
+                  : "view candidates"}
+                , you'll need to create an account first.
               </p>
-              
+
               <div className="space-y-3 pt-4">
                 <button
-                  onClick={() => navigate('/register')}
+                  onClick={() => navigate("/register")}
                   className="w-full py-3 px-4 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors"
                 >
                   Create Account
                 </button>
                 <p className="text-sm text-gray-500">
-                  Already have an account?{' '}
+                  Already have an account?{" "}
                   <button
-                    onClick={() => navigate('/login')}
+                    onClick={() => navigate("/login")}
                     className="text-indigo-600 hover:text-indigo-700 font-medium"
                   >
                     Sign in
