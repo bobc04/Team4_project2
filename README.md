@@ -1,66 +1,103 @@
-# Local Community Business Recovery Network (LCBRN)
+# Local Community Business Revival App
 
 ---
 
-### Description
-<p> Full stack application that pairs job seekers with employers.</p>
+## 📌 Overview
+The **Local Community Business Revival App** is a full-stack web application designed to connect local service providers in Costa Rica with affluent, English-speaking residents who need various services. This platform allows locals to advertise their services at no cost, even if they do not speak English, helping them bypass traditional property management companies.
+
+## 🎯 Features
+- **User Registration & Authentication**: Secure JWT authentication with automatic logout after 1 hour of inactivity.
+- **Service & Job Listings**: Users can post available jobs or services they offer.
+- **Category-Based Search**: Search by profession (e.g., plumbing, cleaning, childcare, etc.).
+- **Bilingual Support**: Integrated Spanish/English translation API.
+- **User Profiles**: Includes name, phone number, and optional email since folks mostly have phones in Costa Rica and no email.
+- **Responsive UI**: Built with Tailwind, React, & Vite for a smooth user experience.
+
+## 🛠️ Tech Stack
+### **Frontend:**
+- React (Vite)
+- TypeScript
+- Zustand (for state management)
+- React Router
+- Tailwind CSS
+
+### **Backend:**
+- Node.js (Express.js)
+- PostgreSQL (Sequelize ORM)
+- JWT Authentication
+- Google Translate API
+
+
+### **Deployment:**
+- Frontend & Backend hosted on **Render**
+- Environment variables for security & configuration
+
+## 🚀 Getting Started
+### **1️⃣ Clone the Repository**
+```sh
+ git clone https://github.com/YOUR_GITHUB_USERNAME/local-community-business-revival.git
+ cd local-community-business-revival
+```
+
+### **2️⃣ Install Dependencies**
+#### Client (Frontend)
+```sh
+cd client
+npm install
+```
+#### Server (Backend)
+```sh
+cd ../server
+npm install
+```
+
+### **3️⃣ Set Up Environment Variables**
+Create a `.env` file in the `server` directory with:
+```sh
+DATABASE_URL=your_postgres_database_url
+JWT_SECRET=your_jwt_secret_key
+TRANSLATE_API_KEY=your_google_translate_api_key
+FIREBASE_API_KEY=your_firebase_api_key
+```
+
+### **4️⃣ Run the Application**
+#### Start the Backend:
+```sh
+cd server
+npm run dev
+```
+#### Start the Frontend:
+```sh
+cd client
+npm run dev
+```
+The app will be available at `http://localhost:5173`
+
+## 📂 Project Structure
+```
+local-community-business-revival/
+│── client/ (React Frontend)
+│── server/ (Express Backend)
+│── database/ (PostgreSQL Scripts & Migrations)
+│── seeders/ (Initial Data Population)
+│── .env (Environment Variables)
+│── README.md
+```
+
+## 📝 Future Enhancements
+- **User Reviews & Ratings** button to translate entire page as well as text.
+- **In-App Messaging** for direct communication.
+- **Payment Integration** for seamless transactions.
+
+## 🤝 Contributing
+Want to contribute? Feel free to submit a pull request or open an issue!
+
+## 📜 License
+This project is licensed under the MIT License.
 
 ---
-
-### Technical Requirements
-Technologies and tools used:
-<p>
-- Microsoft Visual Studio Code <br/>
-- Github <br/>
-- TypeScirpt, NPM, NPM Inquirer, Node.js, PostgresSQL, Vite, NPM PG, Express, React, Render, and Javascript <br/> 
+🔥 **Empowering Local Communities – One Connection at a Time!**
 
 
----
-### User Story
-- AS an employer:
-- I WANT to use an application to search candidate applications
-- An easy to use application
-- SO THAT I can hire the best candidates
-- As a job seeker:
-- List skills and experience to connect with employers
-- Track applications submitted
 
----
-
-### Acceptance Criteria
-- GIVEN a candidate / employer search application
-- WHEN the candidate / employer search page loads
-- Information for candidates / employers should be displayed, including name, username, location, avatar, email
-- Candidate and employer information should be easy to create, read, update, and modify
-
----
-
-### Installation and Running the Application
-- Clone this repo: 'https://github.com/bobc04/Team4_project2' (without quotes)
-- Make sure all listed application are installed
-- From the directory where the package.json is installed run:
-  - npm i
-  - npm run build
-  - npm run start (maybe npm run dev)
-- Using Render https://render.com/ follow steps to deploy application
-
-### Link to Deployed Application
-- 'https://lcbrn.onrender.com/' 
-
----
-### License
-<p>
-This project is licensed under the MIT free software agreement. The repo owner is the copyright holder but grants permission to use, modify, and distribute the application.
-</p>
-
----
-
-### Credits
-<p>
-This application was developed by the the repo owner, with contributions from numerous libraries, external references, publications, and publicly available data.
-</p>
-
-<p>
-Thanks to the FSF-PT-EAST-OCTOBER-100724-MTTH-CONS(B) instructional staff whose guidance and mentorship has greatly assisted with the creation of this application.
-</p>
 
