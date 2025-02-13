@@ -1,4 +1,3 @@
-import React from 'react';
 import { LogOut, Camera, Mail } from 'lucide-react';
 import { useAuthStore } from '../lib/store';
 import { useNavigate } from 'react-router-dom';
