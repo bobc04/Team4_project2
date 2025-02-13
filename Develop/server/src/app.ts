@@ -2,11 +2,12 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
+import path from 'path';
 
 import userRoutes from './routes/userRoutes';
 import jobRoutes from './routes/jobRoutes';
 import searchRoutes from './routes/searchRoutes';
-import serviceRoutes from './routes/serviceRoutes'; // Ensure service routes are included
+import serviceRoutes from './routes/serviceRoutes';
 
 dotenv.config();
 
@@ -14,8 +15,11 @@ const app = express();
 
 // Middleware setup
 app.use(express.json());
-app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:5173' })); // Adjust frontend URL if needed
-app.use(helmet()); // Adds security headers
+app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:5173' }));
+app.use(helmet());
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // Routes setup
 app.use('/api', searchRoutes);
@@ -23,9 +27,9 @@ app.use('/api/users', userRoutes);
 app.use('/api/jobs', jobRoutes);
 app.use('/api/services', serviceRoutes);
 
-// ✅ Add a default route for `/` (prevents "Cannot GET /" issue)
-app.get('/', (req: express.Request, res: express.Response) => {
-  res.send('🌍 Community Business Revival Network API is running!');
+// Handle React routing, return all requests to React app
+app.get('*', (req: express.Request, res: express.Response) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
 // Error handling middleware (helps with debugging)

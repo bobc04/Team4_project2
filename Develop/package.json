@@ -1,0 +1,37 @@
+{
+    "name": "root",
+    "private": true,
+    "workspaces": [
+        "client",
+        "server"
+    ],
+    "scripts": {
+        "start": "cd server && npm start",
+        "build": "cd client && npm run build",
+        "install:all": "npm install && npm run install:client && npm run install:server",
+        "install:client": "cd client && npm install",
+        "install:server": "cd server && npm install",
+        "client": "cd client && npm run dev",
+        "server": "cd server && npm run dev",
+        "dev": "concurrently \"npm run server\" \"npm run client\"",
+        "clean": "rm -rf node_modules && rm -rf client/node_modules && rm -rf server/node_modules && rm -rf package-lock.json && rm -rf client/package-lock.json && rm -rf server/package-lock.json",
+        "setup": "npm run clean && npm run install:all",
+        "build:all": "npm run install:all && npm run build",
+        "build:server": "cd server && tsc",
+        "build:client": "cd client && npm run build",
+        "build:full": "npm run build:client && npm run build:server",
+        "lint": "cd client && npm run lint && cd ../server && npm run lint",
+        "test": "cd client && npm test && cd ../server && npm test"
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2",
+        "nodemon": "^3.1.0",
+        "ts-node": "^10.9.2",
+        "@types/node": "^20.0.0",
+        "typescript": "^5.0.0"
+    },
+    "engines": {
+        "node": ">=20.0.0",
+        "npm": ">=10.0.0"
+    }
+}
