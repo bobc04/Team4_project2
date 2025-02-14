@@ -20,10 +20,9 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 interface JobMapProps {
   jobs: Job[];
-  onJobSelect?: (job: Job) => void;
 }
 
-export default function JobMap({ jobs, onJobSelect }: JobMapProps) {
+export default function JobMap({ jobs }: JobMapProps) {
   // State to store the user's current location
   const [currentLocation, setCurrentLocation] = useState<{
     lat: number;
