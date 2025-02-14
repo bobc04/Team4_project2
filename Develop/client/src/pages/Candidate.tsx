@@ -1,4 +1,4 @@
-import React from "react";
+//import React from "react";
 import { Mail, Phone, Briefcase, MapPin } from "lucide-react";
 
 interface Candidate {
