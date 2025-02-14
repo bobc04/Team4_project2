@@ -1,16 +1,14 @@
-import React from 'react';
-import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
-import { Map as LeafletMap } from 'leaflet';
-// import { searchLocation } from '@/lib/geocoding';
-import { Search } from 'lucide-react';
-import 'leaflet/dist/leaflet.css';
-
-
+import React from "react";
+import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
+import { Map as LeafletMap } from "leaflet";
+import { searchLocation } from "@/lib/geocoding";
+import { Search } from "lucide-react";
+import "leaflet/dist/leaflet.css";
 
 // Fix Leaflet default marker icon
-import * as L from 'leaflet';
-import icon from 'leaflet/dist/images/marker-icon.png';
-import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import * as L from "leaflet";
+import icon from "leaflet/dist/images/marker-icon.png";
+import iconShadow from "leaflet/dist/images/marker-shadow.png";
 
 const DefaultIcon = L.icon({
   iconUrl: icon,
@@ -22,7 +20,11 @@ const DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 interface LocationPickerProps {
-  onLocationSelect: (location: { lat: number; lng: number; address: string }) => void;
+  onLocationSelect: (location: {
+    lat: number;
+    lng: number;
+    address: string;
+  }) => void;
   initialLocation?: { lat: number; lng: number };
 }
 
@@ -35,14 +37,17 @@ function MapEvents({ onClick }: { onClick: (latlng: L.LatLng) => void }) {
   return null;
 }
 
-export default function LocationPicker({ onLocationSelect, initialLocation }: LocationPickerProps) {
-  const [searchQuery, setSearchQuery] = useState('');
+export default function LocationPicker({
+  onLocationSelect,
+  initialLocation,
+}: LocationPickerProps) {
+  const [searchQuery, setSearchQuery] = useState("");
   const [mapRef, setMapRef] = useState<LeafletMap | null>(null);
   const [marker, setMarker] = useState<L.LatLng | null>(
     initialLocation ? L.latLng(initialLocation.lat, initialLocation.lng) : null
   );
 
-  const defaultCenter: L.LatLngTuple = initialLocation 
+  const defaultCenter: L.LatLngTuple = initialLocation
     ? [initialLocation.lat, initialLocation.lng]
     : [51.505, -0.09];
 
@@ -55,10 +60,14 @@ export default function LocationPicker({ onLocationSelect, initialLocation }: Lo
         const newLatLng = L.latLng(parseFloat(lat), parseFloat(lon));
         setMarker(newLatLng);
         mapRef?.setView(newLatLng, 13);
-        onLocationSelect({ lat: parseFloat(lat), lng: parseFloat(lon), address: display_name });
+        onLocationSelect({
+          lat: parseFloat(lat),
+          lng: parseFloat(lon),
+          address: display_name,
+        });
       }
     } catch (error) {
-      console.error('Failed to search location:', error);
+      console.error("Failed to search location:", error);
     }
   };
 
@@ -69,9 +78,13 @@ export default function LocationPicker({ onLocationSelect, initialLocation }: Lo
         `https://nominatim.openstreetmap.org/reverse?lat=${latlng.lat}&lon=${latlng.lng}&format=json`
       );
       const data = await response.json();
-      onLocationSelect({ lat: latlng.lat, lng: latlng.lng, address: data.display_name });
+      onLocationSelect({
+        lat: latlng.lat,
+        lng: latlng.lng,
+        address: data.display_name,
+      });
     } catch (error) {
-      console.error('Failed to reverse geocode:', error);
+      console.error("Failed to reverse geocode:", error);
     }
   };
 
@@ -97,7 +110,7 @@ export default function LocationPicker({ onLocationSelect, initialLocation }: Lo
         <MapContainer
           center={defaultCenter}
           zoom={13}
-          style={{ height: '100%', width: '100%' }}
+          style={{ height: "100%", width: "100%" }}
           ref={setMapRef}
           className="z-0" // Ensure map stays below modals/dropdowns
         >

@@ -1,7 +1,7 @@
+import react, { useState } from "react";
 import { UserIcon, Users, ArrowRight, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../lib/store";
-import { useState } from 'react';
 
 export function Search() {
   const navigate = useNavigate();
