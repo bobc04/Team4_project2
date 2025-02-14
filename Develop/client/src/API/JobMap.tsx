@@ -1,7 +1,7 @@
-//import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Job } from "@/types";
 import "leaflet/dist/leaflet.css";
+import React, { useState, useEffect } from "react";
 
 // Fix Leaflet default marker icon
 import L from "leaflet";
@@ -24,13 +24,47 @@ interface JobMapProps {
 }
 
 export default function JobMap({ jobs, onJobSelect }: JobMapProps) {
-  // Calculate map bounds based on job locations
-  const bounds = L.latLngBounds(
-    jobs.map((job) => [job.latitude, job.longitude])
-  );
+  // State to store the user's current location
+  const [currentLocation, setCurrentLocation] = useState<{
+    lat: number;
+    lng: number;
+  } | null>(null);
+
+  // Use the Geolocation API to get the current position when the component mounts
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setCurrentLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        (error) => {
+          console.error("Error getting current location:", error);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  }, []);
+
+  // Create an array of coordinates for the job markers
+  const jobLocations: [number, number][] = jobs.map((job) => [
+    job.latitude,
+    job.longitude,
+  ]);
+
+  // If current location is available, add it to the list of coordinates for bounds calculation
+  if (currentLocation) {
+    jobLocations.push([currentLocation.lat, currentLocation.lng]);
+  }
+
+  // Calculate the map bounds so that all markers are visible
+  const bounds = L.latLngBounds(jobLocations);
 
   return (
-    <div className="h-[400px] w-[801px] rounded-lg overflow-hidden border border-gray-300">
+    <div className="h-[400px] w-[1500px] rounded-lg overflow-hidden border border-gray-300">
       <MapContainer
         bounds={bounds}
         style={{ height: "100%", width: "100%" }}
@@ -42,31 +76,15 @@ export default function JobMap({ jobs, onJobSelect }: JobMapProps) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {jobs.map((job) => (
-          <Marker
-            key={job.id}
-            position={[job.latitude, job.longitude]}
-            eventHandlers={{
-              click: () => onJobSelect?.(job),
-            }}
-          >
-            <Popup>
-              <div className="p-2 min-w-[200px]">
-                <h3 className="font-semibold text-lg text-gray-900">
-                  {job.title}
-                </h3>
-                <p className="text-sm text-gray-600">{job.company}</p>
-                <p className="text-sm text-gray-500 mt-1">{job.location}</p>
-                <p className="text-sm text-gray-500 mt-1">{job.salary_range}</p>
-                <button
-                  onClick={() => onJobSelect?.(job)}
-                  className="mt-2 w-full px-3 py-1.5 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition-colors"
-                >
-                  View Details
-                </button>
-              </div>
-            </Popup>
+          <Marker key={job.id} position={[job.latitude, job.longitude]}>
+            <Popup>{job.title}</Popup>
           </Marker>
         ))}
+        {currentLocation && (
+          <Marker position={[currentLocation.lat, currentLocation.lng]}>
+            <Popup>Your Location</Popup>
+          </Marker>
+        )}
       </MapContainer>
     </div>
   );

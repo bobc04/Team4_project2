@@ -1,14 +1,18 @@
-
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { Navbar } from './components/Navbar';
-import { Search } from './pages/Search';
-import { Candidates } from './pages/Candidate';
-import { Work } from './pages/Work';
-import { Profile } from './pages/Profile';
-import { Translate } from './pages/Translate';
-import { Login } from './pages/Login';
-import { Register } from './pages/Register';
-import { ProtectedRoute } from './components/ProtectedRoute';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { Navbar } from "./components/Navbar";
+import { Search } from "./pages/Search";
+import { Candidates } from "./pages/Candidate";
+import { Work } from "./pages/Work";
+import { Profile } from "./pages/Profile";
+import { Translate } from "./pages/Translate";
+import { Login } from "./pages/Login";
+import Register from "./pages/Register";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
